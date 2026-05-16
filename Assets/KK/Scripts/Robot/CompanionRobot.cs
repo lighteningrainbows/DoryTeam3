@@ -111,4 +111,11 @@ public class CompanionRobot : MonoBehaviour
 
         isMoving = false;
     }
+
+    public void ResetState()
+    {
+        StopAllCoroutines();
+        isMoving = false;
+        isFixed = false;
+    }
 }
