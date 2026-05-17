@@ -863,7 +863,7 @@ MonoBehaviour:
   selectSpriteUI: {fileID: 1650743053}
   decisionImageObject: {fileID: 128161259}
   sceneEntries:
-  - sceneName: TestScene
+  - sceneName: MainGame
     quitGame: 0
   - sceneName: 
     quitGame: 1
