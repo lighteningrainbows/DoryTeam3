@@ -24,6 +24,11 @@ public class StageManager : MonoBehaviour
         {
             ReloadStage();
         }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            LoadNextStage();
+        }
     }
 
     public void LoadStage(int index)

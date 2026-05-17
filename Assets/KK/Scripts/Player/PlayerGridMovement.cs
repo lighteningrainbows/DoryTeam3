@@ -83,7 +83,10 @@ public class PlayerGridMovement : MonoBehaviour
         }
 
         if (GridManager.Instance.IsBlocked(targetCell))
+        {
+            Debug.Log("•Ç”»’è‚Å’Ê‚ê‚È‚¢: " + targetCell);
             return;
+        }
 
         StartCoroutine(MoveRoutine(targetCell));
     }

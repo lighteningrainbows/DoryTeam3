@@ -6,6 +6,8 @@ public class GridManager : MonoBehaviour
 {
     public static GridManager Instance;
 
+    public LayerMask blockLayer;
+
     public Tilemap wallTilemap;
     public Grid grid;
 
@@ -20,6 +22,8 @@ public class GridManager : MonoBehaviour
     {
         grid = stage.grid;
         wallTilemap = stage.wallTilemap;
+
+        blockedCells.Clear();
     }
 
     public Vector3Int GetCell(Vector3 pos)
@@ -51,4 +55,24 @@ public class GridManager : MonoBehaviour
     {
         blockedCells.Remove(cell);
     }
+
+    void OnDrawGizmos()
+    {
+        if (wallTilemap == null) return;
+
+        Gizmos.color = Color.red;
+
+        BoundsInt bounds = wallTilemap.cellBounds;
+
+        foreach (Vector3Int pos in bounds.allPositionsWithin)
+        {
+            if (!wallTilemap.HasTile(pos)) continue;
+
+            Vector3 world =
+                wallTilemap.GetCellCenterWorld(pos);
+
+            Gizmos.DrawWireCube(world, Vector3.one * 0.9f);
+        }
+    }
+
 }

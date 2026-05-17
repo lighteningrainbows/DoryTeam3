@@ -135,9 +135,10 @@ GameObject:
   - component: {fileID: 566862644}
   - component: {fileID: 566862646}
   - component: {fileID: 566862647}
+  - component: {fileID: 566862648}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -256,7 +257,7 @@ Transform:
   m_GameObject: {fileID: 566862639}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -5.5, y: 9.5, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -332,6 +333,33 @@ MonoBehaviour:
   canPressSwitch: 1
   canFallInHole: 1
   canBeKicked: 1
+--- !u!50 &566862648
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 566862639}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!1 &590347415
 GameObject:
   m_ObjectHideFlags: 0
@@ -363,6 +391,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StageManager
   stagePrefabs:
   - {fileID: 5002992562547434678, guid: 4248b19537c168d4a8a88798a6ce62bd, type: 3}
+  - {fileID: 7196293450887914304, guid: d264e623515f0ce49a6c090f6cf63292, type: 3}
   stageRoot: {fileID: 1634577101}
   player: {fileID: 566862642}
   robot: {fileID: 1433259923}
@@ -564,6 +593,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a6ff988dae1acd49a64380f29ea8714, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GridManager
+  blockLayer:
+    serializedVersion: 2
+    m_Bits: 384
   wallTilemap: {fileID: 0}
   grid: {fileID: 0}
 --- !u!4 &1166411697
@@ -705,7 +737,7 @@ Transform:
   m_GameObject: {fileID: 1433259920}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -5.5, y: 9.5, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 1
   m_Children: []
