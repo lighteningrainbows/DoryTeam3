@@ -25,7 +25,7 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
             if (instance) return instance;
 
             // インスタンスに同じ型のオブジェクトを探してきて代入
-            instance = FindFirstObjectByType<T>();
+            instance = FindAnyObjectByType<T>();
 
             // 設定できたらそのまま返す
             if (instance) return instance;

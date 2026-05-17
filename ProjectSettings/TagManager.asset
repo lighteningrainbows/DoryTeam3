@@ -2,16 +2,16 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!78 &1
 TagManager:
-  serializedVersion: 2
+  serializedVersion: 3
   tags: []
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Robot
   - Water
   - UI
-  - 
+  - Gimmick
   - 
   - 
   - 
@@ -41,3 +41,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Ground
+    uniqueID: 3753056903
+    locked: 0
+  - name: Gimmick
+    uniqueID: 1718898817
+    locked: 0
+  - name: Entity
+    uniqueID: 4281762469
+    locked: 0
+  m_RenderingLayers:
+  - Default
+  m_MigratedRenderPipelines: []
