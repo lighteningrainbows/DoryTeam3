@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 using UnityEngine.UI;
+using AudioName;
 
 /// <summary>
 /// UIを選択時にSpriteを変化させるクラス
@@ -129,20 +130,34 @@ public class SelectSpriteUI : MonoBehaviour
     /// <param name="direction"></param>
     private void MoveSelection(int direction)
     {
-        if (spriteSets.Length == 0) 
+        if (spriteSets.Length == 0)
             return;
-        
+
+        int beforeIndex = currentIndex;
+
         if (isUnSelected)
         {
-            currentIndex = direction > 0 ? spriteSets.Length - 1 : 0;
+            currentIndex = direction > 0
+                ? spriteSets.Length - 1
+                : 0;
+
             isUnSelected = false;
         }
         else
-            currentIndex = (currentIndex + direction + spriteSets.Length) % spriteSets.Length;
+        {
+            currentIndex =
+                (currentIndex + direction + spriteSets.Length)
+                % spriteSets.Length;
+        }
+
+        // 選択が変わった時だけSE
+        if (beforeIndex != currentIndex || isUnSelected == false)
+        {
+            AudioManager.Instance.PlaySE(SEName.PUNCH_SE_NAME);
+        }
 
         ApplySelection(currentIndex);
     }
-
     private void ApplyAllUnSelected()
     {
         for (int i = 0; i < spriteSets.Length; i++)

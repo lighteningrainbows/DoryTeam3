@@ -31,6 +31,8 @@ public class FloorSwitch : MonoBehaviour
 
     void UpdateSwitch()
     {
+        AudioManager.Instance.PlaySE("SwitchSE");
+
         bool isPressed = actorsOnSwitch.Count > 0;
 
         foreach (GimmickReceiver target in targets)

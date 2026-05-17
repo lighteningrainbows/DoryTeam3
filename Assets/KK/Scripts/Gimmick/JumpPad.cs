@@ -6,14 +6,22 @@ public class JumpPad : MonoBehaviour
     public float jumpTime = 0.18f;
 
     bool isJumping;
+    Vector3Int padCell;
+
+    void Start()
+    {
+        padCell =
+            GridManager.Instance.GetCell(transform.position);
+
+        // í èÌà⁄ìÆÇ≈ÇÕì¸ÇÍÇ»Ç¢É}ÉXÇ…Ç∑ÇÈ
+        GridManager.Instance.AddBlock(padCell);
+    }
 
     public void KickByPlayer(Transform player)
     {
         print("KICK");
-        if (isJumping) return;
 
-        Vector3Int padCell =
-            GridManager.Instance.GetCell(transform.position);
+        if (isJumping) return;
 
         Vector3Int playerCell =
             GridManager.Instance.GetCell(player.position);
@@ -46,7 +54,7 @@ public class JumpPad : MonoBehaviour
 
         Vector3Int finalCell;
 
-        if (GridManager.Instance.IsWall(landingCell))
+        if (GridManager.Instance.IsBlocked(landingCell))
         {
             finalCell = obstacleCell;
         }
@@ -63,15 +71,14 @@ public class JumpPad : MonoBehaviour
 
         float t = 0;
 
+        AudioManager.Instance.PlaySE("JumpSE");
+
         while (t < jumpTime)
         {
             t += Time.deltaTime;
 
             player.position =
-                Vector3.Lerp(
-                    start,
-                    end,
-                    t / jumpTime);
+                Vector3.Lerp(start, end, t / jumpTime);
 
             yield return null;
         }
