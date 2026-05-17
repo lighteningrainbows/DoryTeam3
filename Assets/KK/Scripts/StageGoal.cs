@@ -14,6 +14,6 @@ public class StageGoal : MonoBehaviour
         if (!other.CompareTag("Player"))
             return;
 
-        stageManager.LoadNextStage();
+        stageManager.StageClear();
     }
 }
