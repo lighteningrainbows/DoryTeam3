@@ -55,12 +55,15 @@ public class CompanionRobot : MonoBehaviour
     public void ToggleFix()
     {
         isFixed = !isFixed;
+        AudioManager.Instance.PlaySE("RobotSE");
     }
 
     public void Kick(Vector3Int dir)
     {
         print("p");
         if (isMoving) return;
+
+        AudioManager.Instance.PlaySE("PunchSE");
 
         StartCoroutine(
             KickRoutine(dir));

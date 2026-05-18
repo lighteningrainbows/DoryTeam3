@@ -10,10 +10,25 @@ public class PlayerGridMovement : MonoBehaviour
 
     Vector2Int facing = Vector2Int.down;
 
+    PlayerAnimation playerAnimation;
+
+    public bool CanControl { get; set; } = true;
     public Vector2Int LastMoveDir => facing;
+
+    void Start()
+    {
+        playerAnimation = GetComponent<PlayerAnimation>();
+
+        if (playerAnimation != null)
+        {
+            playerAnimation.SetDirection(facing);
+            playerAnimation.SetMoving(false);
+        }
+    }
 
     void Update()
     {
+        if (!CanControl) return;
         if (isMoving) return;
 
         HandleLookInput();
@@ -23,16 +38,16 @@ public class PlayerGridMovement : MonoBehaviour
     void HandleLookInput()
     {
         if (Input.GetKeyDown(KeyCode.UpArrow))
-            facing = Vector2Int.up;
+            SetFacing(Vector2Int.up);
 
         else if (Input.GetKeyDown(KeyCode.DownArrow))
-            facing = Vector2Int.down;
+            SetFacing(Vector2Int.down);
 
         else if (Input.GetKeyDown(KeyCode.LeftArrow))
-            facing = Vector2Int.left;
+            SetFacing(Vector2Int.left);
 
         else if (Input.GetKeyDown(KeyCode.RightArrow))
-            facing = Vector2Int.right;
+            SetFacing(Vector2Int.right);
     }
 
     void HandleMoveInput()
@@ -54,7 +69,7 @@ public class PlayerGridMovement : MonoBehaviour
         if (dir != Vector3Int.zero)
         {
             // à⁄ìÆÇµÇΩï˚å¸Çå¸Ç≠
-            facing = new Vector2Int(dir.x, dir.y);
+            SetFacing(new Vector2Int(dir.x, dir.y));
 
             TryMove(dir);
         }
@@ -83,7 +98,10 @@ public class PlayerGridMovement : MonoBehaviour
         }
 
         if (GridManager.Instance.IsBlocked(targetCell))
+        {
+            Debug.Log("ï«îªíËÇ≈í ÇÍÇ»Ç¢: " + targetCell);
             return;
+        }
 
         StartCoroutine(MoveRoutine(targetCell));
     }
@@ -111,6 +129,11 @@ public class PlayerGridMovement : MonoBehaviour
     {
         isMoving = true;
 
+        if (playerAnimation != null)
+        {
+            playerAnimation.SetMoving(true);
+        }
+
         Vector3Int previousCell =
             GridManager.Instance.GetCell(transform.position);
 
@@ -133,18 +156,38 @@ public class PlayerGridMovement : MonoBehaviour
 
         transform.position = end;
 
-        // à⁄ìÆëOÇÃà íuÇ…ÉçÉ{Çà⁄ìÆÇ≥ÇπÇÈ
         if (robot != null)
         {
             robot.MoveToBehind(previousCell);
         }
 
         isMoving = false;
+
+        if (playerAnimation != null)
+        {
+            playerAnimation.SetMoving(false);
+        }
     }
 
     public void ResetState()
     {
         StopAllCoroutines();
         isMoving = false;
+
+        if (playerAnimation != null)
+        {
+            playerAnimation.SetMoving(false);
+            playerAnimation.SetDirection(facing);
+        }
+    }
+
+    void SetFacing(Vector2Int dir)
+    {
+        facing = dir;
+
+        if (playerAnimation != null)
+        {
+            playerAnimation.SetDirection(facing);
+        }
     }
 }

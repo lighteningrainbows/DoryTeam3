@@ -41,12 +41,34 @@ public class Door : GimmickReceiver
         }
         else
         {
+            DestroyRockOnDoor();
+
             wallTilemap.SetTile(doorCell, closedTile);
         }
 
         if (visual != null)
         {
             visual.SetActive(isOpen);
+        }
+    }
+
+    void DestroyRockOnDoor()
+    {
+        Vector3 worldPos =
+            wallTilemap.GetCellCenterWorld(doorCell);
+
+        Collider2D[] hits =
+            Physics2D.OverlapCircleAll(worldPos, 0.3f);
+
+        foreach (Collider2D hit in hits)
+        {
+            PushRock rock =
+                hit.GetComponent<PushRock>();
+
+            if (rock != null)
+            {
+                Destroy(rock.gameObject);
+            }
         }
     }
 }

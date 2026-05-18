@@ -7,6 +7,8 @@ public class PlayerKick : MonoBehaviour
 
     PlayerGridMovement movement;
 
+    public bool CanControl { get; set; } = true;
+
     void Start()
     {
         movement = GetComponent<PlayerGridMovement>();
@@ -14,6 +16,8 @@ public class PlayerKick : MonoBehaviour
 
     void Update()
     {
+        if (!CanControl) return;
+
         if (Input.GetKeyDown(KeyCode.F))
         {
             Kick();
